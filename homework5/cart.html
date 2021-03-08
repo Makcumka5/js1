@@ -1,0 +1,96 @@
+<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="#">
+    <title>Cart</title>
+</head>
+
+<body>
+    <div id="prod"></div>
+    <hr>
+    <div id="basket"></div>
+
+    <script>
+        'use strict';
+        const cat = {
+            goods: [{
+                id: 1,
+                name: 'T-shirt',
+                price: 150,
+                id_inp: 'i1'
+            }, {
+                id: 2,
+                name: 'Bag',
+                price: 700,
+                id_inp: 'i2'
+            }, {
+                id: 3,
+                name: 'Jacket',
+                price: 1200,
+                id_inp: 'i3'
+            }, {
+                id: 4,
+                name: 'Jeans',
+                price: 900,
+                id_inp: 'i4'
+            }, ],
+
+        }
+
+        let cart = [];
+        cat.goods.forEach(item => {
+            prod.insertAdjacentHTML('beforeend', '<p>' + item.name + ' - ' + item.price + ' $. Введите кол-во: <input type="number" style="width: 50px; text-align: center" id="' + item.id_inp + '" value="1"> <button id="' + item.id + '">в корзину</button></p>');
+            document.getElementById(item.id).addEventListener("click", getCart);
+
+            function getCart() {
+                let res = cart.find(item2 => item2.id == item.id)
+                if (!res) {
+                    let qnt = +document.getElementById(item.id_inp).value;
+                    if (qnt !== 0 && qnt > 0) {
+                        let sum = item.price * qnt;
+                        cart.push({
+                            id: item.id,
+                            name: item.name,
+                            price: item.price,
+                            sumobj: sum,
+                            quantity: qnt
+                        });
+                        console.log(cart);
+                        console.log(sum, qnt);
+                    }
+                }
+
+                if (res) {
+                    let qnt = +document.getElementById(item.id_inp).value;
+                    if (qnt !== 0 && qnt > 0) {
+                        let sum = item.price * qnt;
+                        let res2 = cart.find(item3 => item3.id == item.id)
+                        res2.sumobj = sum + res2.sumobj;
+                        res2.quantity = res2.quantity + qnt;
+                        console.log(res2.sumobj, res2.quantity);
+                    }
+
+                }
+
+
+                let sumCart = cart.reduce((s, cur) => s + cur.sumobj, 0);
+                basket.innerHTML = `Корзина : ${cart.length}</b> товаров на сумму <b>${sumCart}</b> $. <br><br>`;
+
+                cart.forEach(item3 => basket.insertAdjacentHTML('beforeend', `${item3.name} :  ${item3.quantity} - шт., на сумму: <b>${item3.sumobj} $.</b> <br><br>`));
+
+
+            }
+
+
+        });
+
+        if (cart.length === 0) basket.innerHTML = 'Тут пусто!';
+    </script>
+</body>
+
+</html>
