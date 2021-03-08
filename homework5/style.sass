@@ -1,0 +1,51 @@
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+
+.wrapper
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    height: 100vh
+
+.letters
+    display: grid
+    grid-template-columns: repeat(8, 1fr)
+    width: 80vmin
+    height: 10vmin
+    transform: translateX(5vmin)
+
+.numbers
+    display: grid
+    grid-template-rows: repeat(8, 1fr)
+    width: 10vmin
+    height: 100%
+
+.letters,
+.numbers
+    div
+        display: flex
+        justify-content: center
+        align-items: center
+        font-size: 1.25rem
+        text-transform: uppercase
+
+.container
+    display: flex
+
+.game-board
+    position: relative
+    width: 80vmin
+    height: 80vmin
+    background: white
+    display: grid
+    grid-template-rows: repeat(8, 1fr)
+    grid-template-columns: repeat(8, 1fr)
+    outline: 2px solid
+    div
+        display: flex
+        justify-content: center
+        align-items: center
+        font-size: 8vmin
