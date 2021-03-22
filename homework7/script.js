@@ -166,7 +166,6 @@ const snake = {
 
     getNextStepHeadPoint() {
         const headPoint = this.body[0];
-
         switch (this.direction) {
             case "up":
                 if (headPoint.y - 1 < 0)
@@ -299,7 +298,6 @@ const game = {
         document.getElementById("newGameButton").addEventListener("click", () => {
             this.newGameClickHandler();
         });
-        // document.getElementById('newGameButton').addEventListener('click', this.newGameClickHandler.bind(this));
         document.addEventListener("keydown", (event) => {
             this.keyDownHandler(event);
         });
@@ -370,7 +368,6 @@ const game = {
 
     getRandomFreeCoordinates() {
         const exclude = [this.food.getCoordinates(), ...this.snake.getBody()];
-        // without ... -  [{}, [{}, {}, {}]] => with ... [{}, {}, {}, {}];
         while (true) {
             const rndPoint = {
                 x: Math.floor(Math.random() * this.config.getColsCount()),
@@ -458,9 +455,6 @@ const game = {
             nextStepPoint.x < this.config.getColsCount() &&
             nextStepPoint.y < this.config.getRowsCount()
         );
-        /*&&
-               nextStepPoint.x >= 0 &&
-               nextStepPoint.y >= 0;*/
     },
     isGameWon() {
         return this.snake.getBody().length > this.config.getWinFoodCount();
